@@ -1,0 +1,56 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  profiles:
+    active: prod
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+#  jpa:
+#    database: mysql
+#    show-sql: true
+#    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+#    database-platform: org.hibernate.dialect.MySQL5Dialect
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl #指定jpa的自动表生成策略，驼峰自动映射为下划线格式
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0
+  #redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    #使用编号为0的库
+    database: 0
+    password: root
+    timeout: 100s
+    #连接池配置
+    jedis:
+      pool:
+        #最大空闲连接数
+        max-idle: 500
+        #最小空闲连接数
+        min-idle: 50
+        #等待可用连接最大时间，负数为无限制
+        max-wait: -1s
+        #最大活跃连接时间
+        max-active: -1
+
+
